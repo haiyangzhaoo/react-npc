@@ -55,7 +55,7 @@ const baseCon = {
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
-      '@': getPath('../src/')
+      '@': getPath('../src')
     }
   },
 }

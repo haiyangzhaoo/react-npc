@@ -22,7 +22,9 @@
   "homepage": "https://github.com/haiyangzhaoo/react-npc#readme",
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

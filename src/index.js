@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import Header from '@/components/Header'
+import App from '@/App'
 
 ReactDOM.render(
   <React.Fragment>
-    <Header />
+    <App />
   </React.Fragment>,
   document.getElementById('app')
 )
