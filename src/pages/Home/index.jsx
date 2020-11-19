@@ -1,12 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {changeAge, changeName} from '@/store/actions'
+import { Drawer, Button } from 'antd'
 
 function Home(props) {
   console.log(props)
 
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
   return (
-    <>
+    <div>
       Home-{props.store.name}-{props.store.age}
       <button onClick={props.handleChangeName}>
         点我改变
@@ -14,7 +25,21 @@ function Home(props) {
       <button onClick={props.handleChangeAge}>
         点我改变年纪
       </button>
-    </>
+      <Button type="primary" onClick={showDrawer}>
+        Open
+      </Button>
+      <Drawer
+        title="Basic Drawer"
+        placement="right"
+        closable={false}
+        onClose={onClose}
+        visible={visible}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
+    </div>
   )
 }
 

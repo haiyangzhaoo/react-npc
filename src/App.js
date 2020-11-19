@@ -4,6 +4,7 @@ import {HashRouter} from 'react-router-dom'
 import {routes} from '@/assets/routes'
 import {Provider} from 'react-redux'
 import store from '@/store'
+import 'antd/dist/antd.less'
 
 export default function App()
 {
