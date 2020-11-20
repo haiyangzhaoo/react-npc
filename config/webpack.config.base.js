@@ -1,7 +1,11 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const getPath = pathname => path.resolve(__dirname, pathname)
+const devMode = process.env.NODE_ENV !== 'production'
+
+console.log(process.env.NODE_ENV)
 
 const baseCon = {
   entry: {
@@ -20,20 +24,20 @@ const baseCon = {
       },
       // 解析less文件
       {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', {
-          loader: 'less-loader',
-          options: {
-            lessOptions: {
-              javascriptEnabled: true
-            }
+        test: /\.(le|sc|c)ss$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+          {
+              loader: 'less-loader',
+              options: {
+                lessOptions: {
+                  javascriptEnabled: true
+                }
+              }
           }
-        }]
-      },
-      // 解析sass文件
-      {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        ]
       },
       // 图片处理的loader
       {
@@ -47,16 +51,6 @@ const baseCon = {
             }
           }
         ]
-      },
-      // 加载css
-      {
-        test: /\.css$/,
-        use: ['style-loader', {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1
-          }
-        }]
       },
     ]
   },
@@ -79,6 +73,10 @@ const baseCon = {
         minifyJS: true, // 压缩文内js
         removeComments: true // 移除注释
       }
+    }),
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash:6].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash:6].css',
     })
   ]
 }

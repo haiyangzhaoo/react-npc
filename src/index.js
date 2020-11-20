@@ -6,5 +6,5 @@ ReactDOM.render(
   <React.Fragment>
     <App />
   </React.Fragment>,
-  document.getElementById('app')
+  window.document.getElementById('app')
 )

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {changeAge, changeName} from '@/store/actions'
 import { Drawer, Button } from 'antd'
+import './index.css'
 
 function Home(props) {
   console.log(props)
@@ -17,7 +18,7 @@ function Home(props) {
   };
 
   return (
-    <div>
+    <div className="container">
       Home-{props.store.name}-{props.store.age}
       <button onClick={props.handleChangeName}>
         点我改变
