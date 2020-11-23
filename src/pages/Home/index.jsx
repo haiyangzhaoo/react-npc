@@ -1,13 +1,18 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {changeAge, changeName} from '@/store/actions'
-import { Drawer, Button } from 'antd'
+import {changeAge, changeName, changeLocale} from '@/store/actions'
+import { Drawer, Button, Switch } from 'antd'
 import './index.css'
+import { FormattedMessage  } from 'react-intl'
 
 function Home(props) {
-  console.log(props)
+  const cookies = {}
+  document.cookie ? document.cookie.split(';').map(val => {
+      cookies[val.split('=')[0]] = val.split('=')[1]
+  }) : [];
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
+  const [isLocal, setLocal]   = useState(cookies['language'] != undefined ? cookies['language'] : true)
 
   const showDrawer = () => {
     setVisible(true);
@@ -17,8 +22,14 @@ function Home(props) {
     setVisible(false);
   };
 
+  const onChangeLocal = () => {
+    setLocal(!isLocal)
+    document.cookie=`language=${!isLocal}`;
+  }
+
   return (
     <div className="container">
+      <Switch checkedChildren="中文" unCheckedChildren="英文" defaultChecked={isLocal} onClick={onChangeLocal} />
       Home-{props.store.name}-{props.store.age}
       <button onClick={props.handleChangeName}>
         点我改变
@@ -27,7 +38,7 @@ function Home(props) {
         点我改变年纪
       </button>
       <Button type="primary" onClick={showDrawer}>
-        Open
+        <FormattedMessage id="home.slider" />
       </Button>
       <Drawer
         title="Basic Drawer"
@@ -60,6 +71,10 @@ const dispatchToProps = dispatch => {
     handleChangeAge(e) {
       console.log(e.target.innerText)
       dispatch(changeAge(e.target.innerText))
+    },
+    handleChangeLocale(val) {
+      console.log(val)
+      dispatch(changeLocale(val))
     }
   }
 }
