@@ -1,18 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {changeAge, changeName, changeLocale} from '@/store/actions'
 import { Drawer, Button, Switch } from 'antd'
 import './index.css'
-import { FormattedMessage  } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
+import Cookies from 'js-cookie'
 
 function Home(props) {
-  const cookies = {}
-  document.cookie ? document.cookie.split(';').map(val => {
-      cookies[val.split('=')[0]] = val.split('=')[1]
-  }) : [];
-
   const [visible, setVisible] = useState(false)
-  const [isLocal, setLocal]   = useState(cookies['language'] != undefined && cookies['language'] == 'true' ? true : false)
+  const [isLocal, setLocal]   = useState(Cookies.get('language') == 'true' ? true : false)
+
+  useEffect(() => {
+    console.log(isLocal)
+  }, [isLocal])
 
   const showDrawer = () => {
     setVisible(true);
@@ -24,8 +24,7 @@ function Home(props) {
 
   const onChangeLocal = () => {
     setLocal(!isLocal)
-    document.cookie=`language=${!isLocal}`;
-    window.location.reload()
+    Cookies.set('language', !isLocal);
   }
 
   return (

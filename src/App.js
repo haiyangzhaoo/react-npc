@@ -9,16 +9,13 @@ import VConsole from 'vconsole'
 import {IntlProvider} from 'react-intl'
 import enUs from '@/assets/language/en_us'
 import zhCn from '@/assets/language/zh_cn'
+import Cookies from 'js-cookie'
 
 export default function App()
 {
   var vc = new VConsole()
-  const cookies = {}
-  document.cookie ? document.cookie.split(';').map(val => {
-      cookies[val.split('=')[0]] = val.split('=')[1]
-  }) : [];
-  const language = cookies['language'] != undefined && cookies['language'] == 'true' ? 'zh_CN' : 'en_US'
-  console.log(language, cookies)
+
+  const language = Cookies.get('language') == 'true' ? 'zh_CN' : 'en_US'
 
   return (
     <Provider store={store}>
