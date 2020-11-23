@@ -12,7 +12,7 @@ function Home(props) {
   }) : [];
 
   const [visible, setVisible] = useState(false)
-  const [isLocal, setLocal]   = useState(cookies['language'] != undefined ? cookies['language'] : true)
+  const [isLocal, setLocal]   = useState(cookies['language'] != undefined && cookies['language'] == 'true' ? true : false)
 
   const showDrawer = () => {
     setVisible(true);
@@ -25,11 +25,12 @@ function Home(props) {
   const onChangeLocal = () => {
     setLocal(!isLocal)
     document.cookie=`language=${!isLocal}`;
+    window.location.reload()
   }
 
   return (
     <div className="container">
-      <Switch checkedChildren="中文" unCheckedChildren="英文" defaultChecked={isLocal} onClick={onChangeLocal} />
+      <Switch checkedChildren="中文" unCheckedChildren="英文" defaultChecked={!!isLocal} onClick={onChangeLocal} />
       Home-{props.store.name}-{props.store.age}
       <button onClick={props.handleChangeName}>
         点我改变
