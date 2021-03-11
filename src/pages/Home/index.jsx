@@ -23,6 +23,8 @@ function Home(props) {
   };
 
   const onChangeLocal = () => {
+    // 强制刷新。。不OK
+    // window.location.reload();
     setLocal(!isLocal)
     Cookies.set('language', !isLocal);
   }
