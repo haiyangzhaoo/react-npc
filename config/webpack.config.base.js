@@ -19,7 +19,15 @@ const baseCon = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: ['babel-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime']
+            }
+          }
+        ],
         exclude: /node_modules/
       },
       // 解析less文件
