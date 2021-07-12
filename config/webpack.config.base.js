@@ -35,7 +35,15 @@ const baseCon = {
         test: /\.(le|sc|c)ss$/,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          // 'css-loader',
+		  {
+		  	loader: 'css-loader',
+		  	options: {
+		  	  modules: {
+		  	    localIdentName: '[local]-[hash:base64:5]'
+		  	  }
+		  	}
+		  },
           'sass-loader',
           {
               loader: 'less-loader',

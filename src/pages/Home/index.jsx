@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {changeAge, changeName, changeLocale} from '@/store/actions'
 import { Drawer, Button, Switch } from 'antd'
-import './index.css'
+import styles from './index.css'
 import { FormattedMessage } from 'react-intl'
 import Cookies from 'js-cookie'
 
@@ -30,7 +30,7 @@ function Home(props) {
   }
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Switch checkedChildren="中文" unCheckedChildren="英文" defaultChecked={!!isLocal} onClick={onChangeLocal} />
       Home-{props.store.name}-{props.store.age}
       <button onClick={props.handleChangeName}>
