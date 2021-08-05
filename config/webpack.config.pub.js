@@ -14,6 +14,13 @@ const proCon = {
       IS_DEVELOPMETN: true
     }),
     new CleanWebpackPlugin()
+	// new webpack.optimize.UglifyJsPlugin({
+	//      compress: {
+	//        warnings: true,
+	// 	   drop_debugger: true,
+	// 	           drop_console: true
+	//      }
+	// })
   ]
 }
 

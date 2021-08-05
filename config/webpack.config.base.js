@@ -19,6 +19,10 @@ const baseCon = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+		exclude: /node_modules/,
+		include: [
+			path.resolve(__dirname, "../src")
+		],
         use: [
           {
             loader: 'babel-loader',
@@ -27,8 +31,7 @@ const baseCon = {
               plugins: ['@babel/plugin-transform-runtime']
             }
           }
-        ],
-        exclude: /node_modules/
+        ]
       },
       // 解析less文件
       {
@@ -66,7 +69,8 @@ const baseCon = {
               outputPath: 'images/' // 设置打包后图片的路径
             }
           }
-        ]
+        ],
+		exclude: /node_modules/
       },
     ]
   },
